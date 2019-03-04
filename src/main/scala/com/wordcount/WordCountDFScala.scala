@@ -9,7 +9,7 @@ object WordCountDFScala extends App {
     getOrCreate()
 
   val sc = sparkSession.sparkContext
-  val rddText = sc.textFile("file:///C:/Users/jronrubia/Desktop/WordCountScala/src/main/assets/input.txt")
+  val rddText = sc.textFile("file:///C:/Users/jronrubia/Desktop/WordCountSpark/src/main/assets/input.txt")
   import sparkSession.sqlContext.implicits._
   val count = rddText.flatMap(_.split(" |\\.")).
     toDF().
@@ -18,5 +18,5 @@ object WordCountDFScala extends App {
   count.coalesce(1).write.
     format("com.databricks.spark.csv").
     option("header", "true").
-    save("file:///C:/Users/jronrubia/Desktop/WordCountScala/src/main/assets/outputDFScala.csv")
+    save("file:///C:/Users/jronrubia/Desktop/WordCountSpark/src/main/assets/outputDFScala.csv")
 }

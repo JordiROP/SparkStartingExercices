@@ -10,11 +10,11 @@ object WordCountRDDScala extends App {
     getOrCreate()
 
   val sc = sparkSession.sparkContext
-  val rddText = sc.textFile("file:///C:/Users/jronrubia/Desktop/WordCountScala/src/main/assets/input.txt")
+  val rddText = sc.textFile("file:///C:/Users/jronrubia/Desktop/WordCountSpark/src/main/assets/input.txt")
   val count = rddText.flatMap(l => l.split(" |\\.")).
     map(w => (w, 1)).
     reduceByKey(_ + _)
 
   val singleCount = count.coalesce(1)
-  singleCount.saveAsTextFile("file:///C:/Users/jronrubia/Desktop/WordCountScala/src/main/assets/outputRDDScala.txt")
+  singleCount.saveAsTextFile("file:///C:/Users/jronrubia/Desktop/WordCountSpark/src/main/assets/outputRDDScala.txt")
 }
